@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BITE Sandwich – Miami</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&family=Alfa+Slab+One&family=Special+Elite&family=Courier+Prime&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1A18;
+    --tile: #4A5568;
+    --warm: #C8A97A;
+    --red: #C0392B;
+    --off-white: #FAF8F4;
+    --mid: #6B7280;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,26,24,0.08);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    gap: 3px;
+  }
+  .nav-logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--mid); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink); color: var(--cream);
+    padding: 10px 24px; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; border: 2px solid var(--ink);
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: transparent; color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 64px 80px 80px;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--mid);
+    margin-bottom: 28px;
+  }
+  .hero-tag::before {
+    content: ''; display: block; width: 24px; height: 1px;
+    background: var(--warm);
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  .hero-headline em {
+    font-style: italic; color: var(--warm);
+  }
+  .hero-sub {
+    font-size: 17px; font-weight: 300; line-height: 1.7;
+    color: #555; max-width: 420px; margin-bottom: 48px;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+    padding: 16px 36px; font-size: 14px; font-weight: 500;
+    letter-spacing: 0.04em; text-decoration: none;
+    border: 2px solid var(--ink); transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--red); border-color: var(--red); }
+  .btn-secondary {
+    font-size: 14px; font-weight: 500; color: var(--ink);
+    text-decoration: none; letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--warm); padding-bottom: 2px;
+  }
+  .hero-right {
+    position: relative; overflow: hidden; background: var(--ink);
+  }
+  .hero-img {
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.85;
+    animation: zoomIn 8s ease-out forwards;
+  }
+  @keyframes zoomIn {
+    from { transform: scale(1.08); }
+    to { transform: scale(1.0); }
+  }
+  .hero-badge {
+    position: absolute; bottom: 220px; left: -24px;
+    background: var(--cream); padding: 20px 28px;
+    box-shadow: 8px 8px 0 var(--warm);
+  }
+  .hero-badge-top {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 4px;
+  }
+  .hero-badge-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700; color: var(--ink);
+  }
+  .hero-scroll {
+    position: absolute; bottom: 40px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid);
+  }
+  .scroll-line {
+    width: 40px; height: 1px; background: var(--warm);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { width: 40px; } 50% { width: 64px; }
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--ink); color: var(--cream);
+    padding: 14px 0; overflow: hidden;
+    border-top: 3px solid var(--warm);
+  }
+  .ticker-track {
+    display: flex; gap: 48px; white-space: nowrap;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-item {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 20px; flex-shrink: 0;
+  }
+  .ticker-dot { width: 4px; height: 4px; background: var(--warm); border-radius: 50%; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* STORY */
+  .story {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+  }
+  .story-img-wrap {
+    position: relative; overflow: hidden;
+  }
+  .story-img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .story-hexes {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='69.3'%3E%3Cpolygon points='30,0 60,17.3 60,52 30,69.3 0,52 0,17.3' fill='none' stroke='rgba(200,169,122,0.15)' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 69px;
+    pointer-events: none;
+  }
+  .story-content {
+    padding: 80px 72px;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--off-white);
+  }
+  .section-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--warm); margin-bottom: 20px;
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 52px); font-weight: 800;
+    line-height: 1.1; margin-bottom: 24px; color: var(--ink);
+  }
+  .section-body {
+    font-size: 16px; font-weight: 300; line-height: 1.8;
+    color: #555; margin-bottom: 32px;
+  }
+  .story-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 8px;
+  }
+  .stat {
+    padding: 20px; border: 1px solid rgba(26,26,24,0.1);
+    background: var(--cream);
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px; color: var(--ink); letter-spacing: 0.04em;
+    line-height: 1; margin-bottom: 4px;
+  }
+  .stat-num span { color: var(--warm); }
+  .stat-label {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* MENU */
+  .menu {
+    padding: 100px 80px;
+    background: var(--ink);
+  }
+  .menu-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 64px;
+  }
+  .menu-header .section-headline { color: var(--cream); margin-bottom: 0; }
+  .menu-header .section-tag { color: var(--warm); }
+  .see-all {
+    font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--warm); text-decoration: none; border-bottom: 1px solid var(--warm);
+    padding-bottom: 2px;
+  }
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .menu-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  .menu-card:hover { background: rgba(200,169,122,0.12); }
+  .menu-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--warm);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .menu-card:hover::before { transform: scaleX(1); }
+  .menu-card-img {
+    width: 100%; height: 180px; object-fit: cover;
+    margin: -36px -32px 20px -32px;
+    width: calc(100% + 64px);
+    display: block;
+  }
+  .menu-card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 0.18em;
+    color: rgba(200,169,122,0.5); margin-bottom: 20px;
+  }
+  .menu-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--cream);
+    margin-bottom: 12px; line-height: 1.2;
+  }
+  .menu-card-desc {
+    font-size: 14px; font-weight: 300; color: rgba(245,240,232,0.55);
+    line-height: 1.6; margin-bottom: 24px;
+  }
+  .menu-category-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--warm); margin-bottom: 12px; padding: 0 4px;
+    border-left: 2px solid var(--warm); padding-left: 12px;
+  }
+  .menu-card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; color: var(--warm); letter-spacing: 0.06em;
+  }
+
+  /* LOCATION */
+  .location {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 60vh;
+  }
+  .location-content {
+    padding: 48px 72px;
+    background: var(--cream);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hours-list {
+    list-style: none; margin-top: 16px; margin-bottom: 24px;
+  }
+  .hours-list li {
+    display: flex; justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(26,26,24,0.08);
+    font-size: 15px;
+  }
+  .hours-list li .day { font-weight: 500; }
+  .hours-list li .time { color: var(--mid); }
+  .hours-list li.closed .time { color: var(--red); }
+  .location-map {
+    background: #2D3748; position: relative; overflow: hidden;
+  }
+  .map-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px;
+    background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%);
+  }
+  .map-pin {
+    width: 48px; height: 48px;
+    background: var(--red); border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 4px 24px rgba(192,57,43,0.4);
+    animation: pinBounce 2s ease-in-out infinite;
+  }
+  @keyframes pinBounce {
+    0%, 100% { transform: rotate(-45deg) translateY(0); }
+    50% { transform: rotate(-45deg) translateY(-8px); }
+  }
+  .map-address {
+    text-align: center; color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+  }
+  .map-address-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: rgba(245,240,232,0.5);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .map-cta {
+    margin-top: 8px;
+    background: var(--warm); color: var(--ink);
+    padding: 12px 28px; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; display: inline-block;
+    transition: opacity 0.2s;
+  }
+  .map-cta:hover { opacity: 0.85; }
+
+  /* ORDER CTA */
+  .order-cta {
+    background: var(--red);
+    padding: 100px 80px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .order-cta::before {
+    content: 'BITE';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 320px; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.04);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    white-space: nowrap; pointer-events: none;
+  }
+  .order-cta .section-headline {
+    color: var(--cream); font-size: clamp(40px, 5vw, 68px);
+    margin-bottom: 20px; position: relative;
+  }
+  .order-cta .section-body {
+    color: rgba(245,240,232,0.75); max-width: 480px;
+    margin: 0 auto 40px; position: relative;
+  }
+  .order-cta .btn-order {
+    background: var(--cream); color: var(--red);
+    padding: 18px 48px; font-size: 15px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; display: inline-block;
+    transition: all 0.2s; position: relative;
+  }
+  .order-cta .btn-order:hover { background: var(--ink); color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: rgba(245,240,232,0.5);
+    padding: 48px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px;
+  }
+  .footer-logo {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    text-decoration: none;
+  }
+  .footer-logo-img {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+  .footer-links {
+    display: flex; gap: 28px; list-style: none;
+  }
+  .footer-links a {
+    color: rgba(245,240,232,0.5); text-decoration: none;
+    letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--warm); }
+
+  /* ANIMATIONS */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vh; }
+    .hero-badge { display: none; }
+    .story { grid-template-columns: 1fr; }
+    .story-img-wrap { height: 40vh; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .location { grid-template-columns: 1fr; }
+    .location-map { height: 40vh; }
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero-left { padding: 48px 24px; }
+    .story-content, .location-content, .menu, .order-cta { padding: 60px 24px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+  }
+
+  /* LANGUAGE TOGGLE */
+  .lang-toggle {
+    display: flex; align-items: center; gap: 0;
+    border: 1px solid rgba(26,26,24,0.2);
+    overflow: hidden; flex-shrink: 0;
+  }
+  .lang-btn {
+    padding: 6px 12px; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    background: transparent; border: none; cursor: pointer;
+    color: var(--mid); transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .lang-btn.active {
+    background: var(--ink); color: var(--cream);
+  }
+  .lang-btn:hover:not(.active) { background: var(--light); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" aria-label="BITE Sandwich"><img class="nav-logo-img" src="images/logo-black.png" alt="BITE Sandwich"></a>
+  <ul class="nav-links">
+    <li><a href="#story" data-i18n="nav_story">Our Story</a></li>
+    <li><a href="#menu" data-i18n="nav_menu">Menu</a></li>
+    <li><a href="#location" data-i18n="nav_location">Location</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+  </div>
+  <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" class="nav-cta">Order Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag" data-i18n="hero_tag">Miami</div>
+    <h1 class="hero-headline" data-i18n="hero_headline">The best<br><em>chimi sandwich</em><br>in Miami.</h1>
+    <p class="hero-sub" data-i18n="hero_sub">No dining room. No reservations. Just Dominican sandwiches made fresh at an open-air counter on SW 1st Street.</p>
+    <div class="hero-actions">
+      <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" class="btn-primary" data-i18n="btn_order">Order Online</a>
+      <a href="#menu" class="btn-secondary" data-i18n="btn_menu">See the Menu</a>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-line"></span>
+      <span data-i18n="scroll_text">Scroll to explore</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Using a gradient placeholder since we can't embed local images in static HTML -->
+    <img src="images/hero-storefront.jpg" class="hero-img" alt="BITE Sandwich Infatuation Approved 2026 storefront in Miami" style="width:100%;height:100%;object-fit:cover;object-position:center;" >
+    <a href="https://www.theinfatuation.com/miami/reviews/bite-sandwich" target="_blank" class="hero-badge" style="text-decoration:none;cursor:pointer;">
+      <div class="hero-badge-top">As seen on</div>
+      <div class="hero-badge-main">The Infatuation</div>
+    </a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span>Chimi Burger</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Porchetta Sandwich</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Pan de Agua</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Cortadito</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Tequeños</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Chimi Pork</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Chimi Chicken</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Natural Juices</div>
+    <!-- repeat for seamless loop -->
+    <div class="ticker-item"><span class="ticker-dot"></span>Chimi Burger</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Porchetta Sandwich</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Pan de Agua</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Cortadito</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Tequeños</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Chimi Pork</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Chimi Chicken</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Natural Juices</div>
+  </div>
+</div>
+
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-img-wrap">
+    <div style="width:100%;height:100%;min-height:500px;background:linear-gradient(135deg,#4A5568 0%,#2D3748 50%,#1A202C 100%);display:flex;flex-direction:column;">
+      <img src="images/story-sandwich-spread.jpg"
+        alt="Signature sandwiches and sides spread at BITE Sandwich Miami"
+        style="width:100%;height:300px;object-fit:cover;object-position:center;display:block;flex-shrink:0;">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px 24px;text-align:center;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(200,169,122,0.25);line-height:1;letter-spacing:0.05em;">1576<br>SW 1ST</div>
+          <div style="width:48px;height:2px;background:var(--warm);margin:12px auto;"></div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.3);">Miami</div>
+        </div>
+      </div>
+    </div>
+    <div class="story-hexes"></div>
+  </div>
+  <div class="story-content reveal" id="story-content">
+    <div class="section-tag" data-i18n="story_tag">Our Story</div>
+    <h2 class="section-headline" data-i18n="story_headline">Every sandwich has a story.</h2>
+    <p class="section-body" data-i18n="story_p1">BITE started with one question: what does a chimi sandwich taste like when it's made right? The answer starts with the <strong>pan de agua</strong>. A traditional Dominican water bread with a crispy crust and a soft, fluffy interior. There's no dining room by design. The counter is where the conversation happens.</p>
+    <p class="section-body" data-i18n="story_p2" style="margin-bottom:0;"><strong>The chimi is a Dominican street sandwich.</strong> Most people outside the DR have never heard of it. Ask about it at the counter and you'll get the whole story while your order is being made. That's the point.</p>
+    
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-header reveal">
+    <div>
+      <div class="section-tag">What We Make</div>
+      <h2 class="section-headline" style="color:var(--cream);" data-i18n="menu_headline">The Menu</h2>
+    </div>
+    <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" class="see-all" data-i18n="btn_order">Order Online</a>
+  </div>
+  <!-- CHIMI SECTION -->
+  <div class="menu-category-label reveal" data-i18n="cat_chimi">Chimi</div>
+  <div class="menu-grid" style="margin-bottom:2px;">
+    <div class="menu-card reveal">
+      <img src="images/menu-chimi-original.jpg" class="menu-card-img" alt="CHIMI Original sandwich">
+      <div class="menu-card-num">01</div>
+      <div class="menu-card-name" data-i18n="chimi_original_name">CHIMI Original</div>
+      <div class="menu-card-desc">Artisan water bread, chorizo, onion, green tomato, cabbage, ketchup, mayo, and mustard. All chimis come with a special house sauce twist.</div>
+      <div class="menu-card-price">$12</div>
+    </div>
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="images/menu-chimi-burger.jpg" alt="Chimi Burger at BITE Sandwich Miami">
+      <div class="menu-card-num">02</div>
+      <div class="menu-card-name" data-i18n="chimi_burger_name">Chimi Burger</div>
+      <div class="menu-card-desc">Artisan water bread, grilled lean beef patty, onion, green tomato, cabbage, ketchup, mayo, and mustard.</div>
+      <div class="menu-card-price">$12</div>
+    </div>
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="images/menu-chimi-chicken.jpg" alt="Chimi Chicken at BITE Sandwich Miami">
+      <div class="menu-card-num">03</div>
+      <div class="menu-card-name" data-i18n="chimi_chicken_name">CHIMI Chicken</div>
+      <div class="menu-card-desc">Artisan bread, grilled chicken breast, onion, green tomato, cabbage, ketchup, mayo, and mustard.</div>
+      <div class="menu-card-price">$12</div>
+    </div>
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="images/menu-chimi-pork.jpg" alt="Chimi Pork at BITE Sandwich Miami">
+      <div class="menu-card-num">04</div>
+      <div class="menu-card-name" data-i18n="chimi_pork_name">CHIMI Pork</div>
+      <div class="menu-card-desc">Artisan bread, pulled pork leg, onions, green tomato, cabbage, ketchup, mayo, and mustard.</div>
+      <div class="menu-card-price">$12</div>
+    </div>
+  </div>
+
+  <!-- SANDWICH SECTION -->
+  <div class="menu-category-label reveal" style="margin-top:32px;" data-i18n="cat_sandwiches">Sandwiches</div>
+  <div class="menu-grid" style="margin-bottom:2px;">
+    <div class="menu-card reveal">
+      <img src="images/menu-porchetta.jpg" class="menu-card-img" alt="Porchetta Sandwich at BITE">
+      <div class="menu-card-num">05</div>
+      <div class="menu-card-name" data-i18n="porchetta_name">Porchetta Sandwich</div>
+      <div class="menu-card-desc">Artisan water bread, thinly sliced porchetta, arugula, garlic oil, and Italian parsley.</div>
+      <div class="menu-card-price">$15</div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="images/menu-pastrami.jpg" class="menu-card-img" alt="Pastrami Sandwich">
+      <div class="menu-card-num">06</div>
+      <div class="menu-card-name" data-i18n="pastrami_name">Pastrami</div>
+      <div class="menu-card-desc">Artisan water bread, perfectly sliced pastrami, gouda cheese, green tomato, arugula, and mayo-mustard sauce.</div>
+      <div class="menu-card-price">$15</div>
+    </div>
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="images/menu-bite-especial.jpg" alt="Bite Especial Completo sandwich at BITE Sandwich Miami">
+      <div class="menu-card-num">07</div>
+      <div class="menu-card-name" data-i18n="bite_special_name">Bite Special</div>
+      <div class="menu-card-desc">Artisan water bread, ham, pulled pork leg, gouda cheese, green tomato, ketchup, and mayo.</div>
+      <div class="menu-card-price">$12</div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="images/menu-breakfast.jpg" class="menu-card-img" alt="Breakfast Sandwich">
+      <div class="menu-card-num">08</div>
+      <div class="menu-card-name" data-i18n="breakfast_name">Breakfast Sandwich</div>
+      <div class="menu-card-desc">Artisan water bread, two scrambled eggs, green tomato, ham, and cheese.</div>
+      <div class="menu-card-price">$9</div>
+    </div>
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="images/menu-chicken-cheese.jpg" alt="Chicken and Cheese sandwich at BITE Sandwich Miami">
+      <div class="menu-card-num">09</div>
+      <div class="menu-card-name" data-i18n="chicken_cheese_name">Chicken & Cheese</div>
+      <div class="menu-card-desc">Artisan bread, grilled chicken breast, green tomato, and gouda cheese.</div>
+      <div class="menu-card-price">$9</div>
+    </div>
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="images/menu-ham-cheese.jpg" alt="Ham and Cheese sandwich at BITE Sandwich Miami">
+      <div class="menu-card-num">10</div>
+      <div class="menu-card-name" data-i18n="ham_cheese_name">Ham & Cheese</div>
+      <div class="menu-card-desc">Artisan water bread, melted cheddar, green tomato, cooked ham, mayo, and ketchup.</div>
+      <div class="menu-card-price">$9</div>
+    </div>
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="images/menu-grilled-cheese.jpg" alt="Grilled Cheese sandwich at BITE Sandwich Miami">
+      <div class="menu-card-num">11</div>
+      <div class="menu-card-name" data-i18n="grilled_cheese_name">Grilled Cheese</div>
+      <div class="menu-card-desc">Artisan water bread, melted cheddar cheese, green tomato, mayonnaise and ketchup.</div>
+      <div class="menu-card-price">$9</div>
+    </div>
+  </div>
+
+  <!-- SIDES + CAFE -->
+  <div class="menu-category-label reveal" style="margin-top:32px;" data-i18n="cat_sides">Sides & Cafe</div>
+  <div class="menu-grid">
+    <div class="menu-card reveal">
+      <img src="images/menu-fries.jpg" class="menu-card-img" alt="French Fries">
+      <div class="menu-card-num">S1</div>
+      <div class="menu-card-name" data-i18n="fries_name">French Fries</div>
+      <div class="menu-card-desc">Fresh-cut, crispy fries.</div>
+      <div class="menu-card-price">$4</div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="images/menu-tequenos.jpg" class="menu-card-img" alt="Tequeño Cheese Bites">
+      <div class="menu-card-num">S2</div>
+      <div class="menu-card-name" data-i18n="tequenos_name">Tequeño Cheese Bites</div>
+      <div class="menu-card-desc">3-piece cheese-filled tequeños. Order these.</div>
+      <div class="menu-card-price">$4</div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="images/menu-juices.jpg" class="menu-card-img" alt="Natural juices at BITE Sandwich Miami - passion fruit tamarind lemon blackberry">
+      <div class="menu-card-num">S3</div>
+      <div class="menu-card-name" data-i18n="juices_name">Natural Juices</div>
+      <div class="menu-card-desc">Passion fruit, tamarind, and blackberry.</div>
+      <div class="menu-card-price">$4</div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="images/menu-coffee.jpg" class="menu-card-img" alt="Espresso at BITE Sandwich">
+      <div class="menu-card-num">S4</div>
+      <div class="menu-card-name">Cortadito & Cafe</div>
+      <div class="menu-card-desc">Espresso $2, Colada $2, Cortadito $3, Iced Coffee $5. Whole milk or almond milk.</div>
+      <div class="menu-card-price">From $2</div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="images/menu-sodas-dominicanas.jpg" class="menu-card-img" alt="Country Club sodas Dominicanas at BITE Sandwich Miami - frambuesa merengue uva" style="object-position:center 55%;">
+      <div class="menu-card-num">S5</div>
+      <div class="menu-card-name" data-i18n="sodas_dom_name">Sodas Dominicanas</div>
+      <div class="menu-card-desc">Country Club: Raspberry, Merengue, and Grape. A Dominican staple.</div>
+      <div class="menu-card-price">$3</div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="images/menu-cheese-balls.jpg" class="menu-card-img" alt="Fried Cheese Balls" style="object-position:center 25%;">
+      <div class="menu-card-num">S6</div>
+      <div class="menu-card-name" data-i18n="cheese_balls_name">Fried Cheese Balls</div>
+      <div class="menu-card-desc">6-piece golden fried cheese balls. The move before your sandwich arrives.</div>
+      <div class="menu-card-price">$4</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ICED COFFEE FEATURE -->
+<section style="display:grid;grid-template-columns:1fr 1fr;min-height:480px;">
+  <div style="background:var(--ink);padding:72px;display:flex;flex-direction:column;justify-content:center;">
+    <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm);margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      <span style="display:block;width:20px;height:1px;background:var(--warm);"></span>
+      Now Available
+    </div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(36px,4vw,52px);font-weight:900;color:var(--cream);line-height:1.05;margin-bottom:20px;">Cold.<br><em style="font-style:italic;color:var(--warm);">Strong.</em><br>Yours.</h2>
+    <p style="font-size:16px;font-weight:300;color:rgba(245,240,232,0.65);line-height:1.8;margin-bottom:36px;max-width:360px;">
+      Iced coffee with milk, pulled fresh and poured over ice. Whole milk or almond. The move after your sandwich.
+    </p>
+    <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank"
+      style="display:inline-block;background:var(--warm);color:var(--ink);padding:14px 32px;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;align-self:flex-start;transition:opacity 0.2s;"
+      onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      Order Now
+    </a>
+  </div>
+  <div style="position:relative;overflow:hidden;">
+    <img src="images/scene-iced-coffee.jpg"
+      alt="Iced coffee with milk at BITE Sandwich Miami"
+      style="width:100%;height:100%;object-fit:cover;object-position:center;">
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="location">
+  <div class="location-content reveal">
+    <div class="section-tag" data-i18n="location_tag">Find Us</div>
+    <h2 class="section-headline" data-i18n="location_headline">We're at the corner.<br>You can't miss us.</h2>
+    <ul class="hours-list">
+      <li><span class="day" data-i18n="hours_mth">Monday - Thursday</span><span class="time">10:00 AM - 10:00 PM</span></li>
+      <li><span class="day" data-i18n="hours_fri">Friday</span><span class="time">10:00 AM - 11:00 PM</span></li>
+      <li><span class="day" data-i18n="hours_sat">Saturday</span><span class="time">10:00 AM - 11:00 PM</span></li>
+      <li class="closed"><span class="day" data-i18n="hours_sun">Sunday</span><span class="time">Closed</span></li>
+    </ul>
+    <p style="font-size:15px;color:var(--mid);line-height:1.7;">
+      1576 SW 1st St, Miami, FL 33135
+    </p>
+  </div>
+  <div class="location-map">
+    <div class="map-placeholder">
+      <div class="map-pin"></div>
+      <a href="https://maps.google.com/?q=1576+SW+1st+St+Miami+FL+33135" target="_blank" style="text-decoration:none;"><div class="map-address">1576 SW 1st St</div>
+      <div class="map-address-sub">Miami, FL 33135</div></a>
+      <a href="https://maps.google.com/?q=1576+SW+1st+St+Miami+FL+33135" target="_blank" class="map-cta">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER CTA -->
+<section class="order-cta" id="order">
+  <h2 class="section-headline" data-i18n="order_headline">Ready to order?</h2>
+  <p class="section-body" data-i18n="order_sub">Available for pickup and delivery. Order through our site or find us on DoorDash, Uber Eats, and Grubhub.</p>
+  <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" target="_blank" class="btn-order">Order Now</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img class="footer-logo-img" src="images/logo-white.png" alt="BITE Sandwich">
+  </div>
+  <ul class="footer-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#menu" data-i18n="nav_menu">Menu</a></li>
+    <li><a href="#location">Hours</a></li>
+    <li><a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank">Order</a></li>
+  </ul>
+  <div>1576 SW 1st St, Miami</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+
+<script>
+const translations = {
+  en: {
+    nav_story: "Our Story",
+    nav_menu: "Menu",
+    nav_location: "Location",
+    hero_tag: "Miami",
+    hero_headline: "The best<br><em>chimi sandwich</em><br>in Miami.",
+    hero_sub: "No dining room. No reservations. Just Dominican sandwiches made from scratch at an open-air counter on SW 1st Street.",
+    btn_order: "Order Online",
+    btn_menu: "See the Menu",
+    story_tag: "Our Story",
+    story_headline: "Every sandwich has a story.",
+    location_tag: "Find Us",
+    location_headline: "We're at the corner.<br>You can't miss us.",
+    hours_mth: "Monday - Thursday",
+    hours_fri: "Friday",
+    hours_sat: "Saturday",
+    hours_sun: "Sunday",
+    hours_closed: "Closed",
+    order_headline: "Ready to order?",
+    order_sub: "Available for pickup and delivery. Order through our site or find us on DoorDash, Uber Eats, and Grubhub.",
+    menu_headline: "The Menu",
+    scroll_text: "Scroll to explore",
+    story_p1: "BITE started with one question: what does a chimi sandwich taste like when it's made right? The answer starts with the <strong>pan de agua</strong>. A traditional Dominican water bread with a crispy crust and a soft, fluffy interior. There's no dining room by design. The counter is where the conversation happens.",
+    story_p2: "<strong>The chimi is a Dominican street sandwich.</strong> Most people outside the DR have never heard of it. Ask about it at the counter and you'll get the whole story while your order is being made. That's the point.",
+
+    // Menu - Chimi
+    chimi_original_name: "CHIMI Original",
+    chimi_burger_name: "Chimi Burger",
+    chimi_chicken_name: "CHIMI Chicken",
+    chimi_pork_name: "CHIMI Pork",
+
+    // Menu - Sandwiches
+    porchetta_name: "Porchetta Sandwich",
+    pastrami_name: "Pastrami",
+    bite_special_name: "Bite Special",
+    breakfast_name: "Breakfast Sandwich",
+    chicken_cheese_name: "Chicken & Cheese",
+    ham_cheese_name: "Ham & Cheese",
+    grilled_cheese_name: "Grilled Cheese",
+
+    // Menu - Sides
+    fries_name: "French Fries",
+    tequenos_name: "Tequeño Cheese Bites",
+    cheese_balls_name: "Fried Cheese Balls",
+
+    // Menu - Beverages
+    juices_name: "Natural Juices",
+    sodas_dom_name: "Sodas Dominicanas",
+    sodas_name: "Sodas",
+    water_sparkling_name: "Sparkling Water",
+    water_name: "Bottle of Water",
+
+    // Menu - Coffee
+    coffee_name: "Coffee & Cafe",
+
+    // Category labels
+    cat_chimi: "Chimi",
+    cat_sandwiches: "Sandwiches",
+    cat_sides: "Sides & Cafe",
+    cat_beverages: "Beverages",
+    cat_coffee: "Coffee",
+  },
+  es: {
+    nav_story: "Nuestra Historia",
+    nav_menu: "Menu",
+    nav_location: "Ubicacion",
+    hero_tag: "Miami",
+    hero_headline: "El mejor<br><em>chimi sandwich</em><br>de Miami.",
+    hero_sub: "Sin salon. Sin reservaciones. Solo sandwiches dominicanos hechos frescos en un mostrador al aire libre en SW 1st Street.",
+    btn_order: "Ordenar Ahora",
+    btn_menu: "Ver el Menu",
+    story_tag: "Nuestra Historia",
+    story_headline: "Cada sandwich tiene una historia.",
+    location_tag: "Encuentranos",
+    location_headline: "Estamos en la esquina.<br>No nos puedes perder.",
+    hours_mth: "Lunes - Jueves",
+    hours_fri: "Viernes",
+    hours_sat: "Sabado",
+    hours_sun: "Domingo",
+    hours_closed: "Cerrado",
+    order_headline: "Listo para ordenar?",
+    order_sub: "Disponible para recoger y delivery. Ordena en nuestro sitio o encuentranos en DoorDash, Uber Eats y Grubhub.",
+    menu_headline: "El Menu",
+    scroll_text: "Desplazate para explorar",
+    story_p1: "BITE nacio con una pregunta: como sabe un chimi cuando esta bien hecho? La respuesta empieza con el <strong>pan de agua</strong>. Un pan dominicano tradicional con una corteza crocante y un interior suave y esponjoso. No hay salon por diseno. El mostrador es donde ocurre la conversacion.",
+    story_p2: "<strong>El chimi es un sandwich callejero dominicano.</strong> La mayoria de la gente fuera de la RD nunca ha escuchado de el. Pregunta en el mostrador y te cuentan toda la historia mientras preparan tu orden. Ese es el punto.",
+
+    // Menu - Chimi
+    chimi_original_name: "Chimi Bite Original",
+    chimi_original_desc: "Pan artesanal de agua, chorizo, cebolla, tomate verde, repollo, ketchup, mayonesa y mostaza. Todos nuestros chimis vienen con un toque de salsa especial de la casa.",
+    chimi_burger_name: "Chimi Burger",
+    chimi_burger_desc: "Pan artesanal de agua, carne de hamburguesa, cebolla, tomate verde, repollo, ketchup, mayonesa y mostaza.",
+    chimi_chicken_name: "Chimi Pollo",
+    chimi_chicken_desc: "Pan artesanal de agua, pechuga de pollo a la parrilla, cebolla, tomate verde, repollo, ketchup, mayonesa y mostaza.",
+    chimi_pork_name: "Chimi Pork",
+    chimi_pork_desc: "Pan artesanal de agua, pierna desmenuzada, cebolla, tomate verde, repollo, ketchup, mayonesa y mostaza.",
+
+    // Menu - Sandwiches
+    porchetta_name: "Porchetta Sandwich",
+    porchetta_desc: "Pan artesanal de agua, finas rebanadas de porchetta, rucula, aceite de ajo y perejil italiano.",
+    pastrami_name: "Pastrami",
+    pastrami_desc: "Pan artesanal de agua, pastrami, queso gouda, tomate verde, rucula, mayonesa y mostaza.",
+    bite_special_name: "Bite Especial Completo",
+    bite_special_desc: "Pan artesanal de agua, pierna de cerdo desmenuzada, jamon, queso gouda, tomate verde, ketchup y mayonesa.",
+    breakfast_name: "Breakfast Sandwich",
+    breakfast_desc: "Pan artesanal de agua, dos huevos revueltos, tomate verde, jamon y queso.",
+    chicken_cheese_name: "Pollo & Queso",
+    chicken_cheese_desc: "Pan artesanal de agua, pechuga de pollo a la parrilla, tomate verde, queso gouda, ketchup y mayonesa.",
+    ham_cheese_name: "Jamon & Queso",
+    ham_cheese_desc: "Pan artesanal de agua, queso cheddar derretido, tomate verde, jamon cocido, mayonesa y ketchup.",
+    grilled_cheese_name: "Derretido de Queso",
+    grilled_cheese_desc: "Pan artesanal de agua, queso cheddar derretido, tomate verde, mayonesa y ketchup.",
+
+    // Menu - Sides
+    fries_name: "Papas Fritas",
+    fries_desc: "Papas fritas crujientes.",
+    tequenos_name: "Mini Tequenos de Queso",
+    tequenos_desc: "3 piezas. Pide estos.",
+    cheese_balls_name: "Bolitas de Queso Fritas",
+    cheese_balls_desc: "6 piezas doradas y crujientes.",
+
+    // Menu - Beverages
+    juices_name: "Jugos Naturales",
+    juices_desc: "Chinola (Maracuya), Tamarindo y Mora.",
+    sodas_dom_name: "Sodas Dominicanas",
+    sodas_dom_desc: "Country Club: Frambuesa, Uva y Merengue.",
+    sodas_name: "Sodas",
+    sodas_desc: "Coca-Cola, Sprite, Canada Dry, Coca-Cola Zero y Diet Coke.",
+    water_sparkling_name: "Agua con Gas",
+    water_sparkling_desc: "San Pellegrino $3",
+    water_name: "Botella de Agua",
+
+    // Menu - Coffee
+    coffee_name: "Cafe & Bebidas Calientes",
+    coffee_desc: "Americano $3, Espresso $2, Colada $2, Cortadito $3, Cafe con Leche $4 (Avena o Almendra $5), Cafe Frio Americano $4, Cafe Frio con Leche $5 (Avena o Almendra $6), Chocolate Caliente $4 (Avena o Almendra $5).",
+
+    // Category labels
+    cat_chimi: "Chimi",
+    cat_sandwiches: "Sandwiches",
+    cat_sides: "Acompanantes",
+    cat_beverages: "Bebidas",
+    cat_coffee: "Cafe",
+  }
+};
+
+function setLang(lang) {
+  // Save preference
+  localStorage.setItem('bite_lang', lang);
+
+  // Update all tagged elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  // Update toggle buttons
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+}
+
+// On load, check saved preference
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('bite_lang') || 'en';
+  setLang(saved);
+});
+</script>
+
+</body>
+</html>
