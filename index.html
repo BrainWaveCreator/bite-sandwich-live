@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXN54JH5T1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXN54JH5T1');
+</script>
+
 <!-- SEO -->
 <title>BITE Sandwich Miami | Best Chimi & Sandwich Shop in Miami, FL</title>
 <meta name="description" content="BITE Sandwich is Miami's best sandwich shop. Famous chimis, pastrami, porchetta, and breakfast sandwiches on artisan bread. Order online for pickup at 1576 SW 1st St, Miami.">
@@ -678,7 +687,7 @@
     <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
     <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
   </div>
-  <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" class="nav-cta">Order Now</a>
+  <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" class="nav-cta" data-track="order_click" data-location="nav">Order Now</a>
 </nav>
 
 <!-- HERO -->
@@ -896,6 +905,7 @@
       Iced coffee with milk, pulled fresh and poured over ice. Whole milk or almond. The move after your sandwich.
     </p>
     <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" rel="noopener"
+      data-track="order_click" data-location="iced_coffee"
       style="display:inline-block;background:var(--warm);color:var(--ink);padding:14px 32px;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;align-self:flex-start;transition:opacity 0.2s;"
       onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
       Order Now
@@ -937,7 +947,7 @@
 <section class="order-cta" id="order">
   <h2 class="section-headline" data-i18n="order_headline">Ready to order?</h2>
   <p class="section-body" data-i18n="order_sub">Available for pickup and delivery. Order through our site or find us on DoorDash, Uber Eats, and Grubhub.</p>
-  <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" rel="noopener" class="btn-order">Order Now</a>
+  <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" rel="noopener" class="btn-order" data-track="order_click" data-location="main_cta">Order Now</a>
 </section>
 
 <!-- FOOTER -->
@@ -1186,6 +1196,14 @@ document.addEventListener('DOMContentLoaded', () => {
       || 'https://www.clover.com/online-ordering/bite-sandwich-miami';
     document.getElementById('lightboxBtn').setAttribute('href', cloverUrl);
 
+    // Track menu item view
+    if (typeof gtag === 'function') {
+      gtag('event', 'menu_item_view', {
+        item_name: name ? name.textContent : 'unknown',
+        item_price: price ? price.textContent : ''
+      });
+    }
+
     lb.classList.add('open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -1214,6 +1232,58 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox();
   });
+
+  // Track clicks on the lightbox "Order This Now" button (item-specific)
+  document.getElementById('lightboxBtn').addEventListener('click', function() {
+    if (typeof gtag === 'function') {
+      gtag('event', 'order_click', {
+        location: 'lightbox',
+        item_name: lbName.textContent || 'unknown',
+        item_price: lbPrice.textContent || ''
+      });
+    }
+  });
+
+  // Track all other Order Now buttons (nav, hero, iced coffee, main cta) via data-track attribute
+  document.querySelectorAll('[data-track="order_click"]').forEach(el => {
+    el.addEventListener('click', function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'order_click', {
+          location: el.getAttribute('data-location') || 'unknown'
+        });
+      }
+    });
+  });
+
+  // Scroll depth tracking — fire at 25%, 50%, 75%, 100%
+  const scrollMarks = [25, 50, 75, 100];
+  const fired = {};
+  window.addEventListener('scroll', () => {
+    const scrollPct = Math.round(
+      ((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight) * 100
+    );
+    scrollMarks.forEach(mark => {
+      if (scrollPct >= mark && !fired[mark]) {
+        fired[mark] = true;
+        if (typeof gtag === 'function') {
+          gtag('event', 'scroll_depth', { percent: mark });
+        }
+      }
+    });
+  }, { passive: true });
+})();
+
+// Track language toggle (defined globally since setLang is global)
+(function() {
+  const origSetLang = window.setLang;
+  if (typeof origSetLang === 'function') {
+    window.setLang = function(lang) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'language_switch', { language: lang });
+      }
+      return origSetLang(lang);
+    };
+  }
 })();
 </script>
 
