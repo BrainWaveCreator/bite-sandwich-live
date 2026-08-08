@@ -216,6 +216,131 @@
   }
   .nav-cta:hover { background: transparent; color: var(--ink); }
 
+  /* HAMBURGER (mobile only) */
+  .hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    transition: all 0.3s ease;
+  }
+
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    color: var(--cream);
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+  }
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+  .mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: transparent;
+    border: none;
+    color: var(--cream);
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    padding: 8px;
+    width: 44px;
+    height: 44px;
+  }
+  .mobile-menu-inner {
+    text-align: center;
+    padding: 60px 32px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .mobile-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+  }
+  .mobile-menu-links li {
+    border-bottom: 1px solid rgba(245, 240, 232, 0.1);
+  }
+  .mobile-menu-link {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--cream);
+    text-decoration: none;
+    padding: 20px 0;
+    transition: color 0.2s;
+  }
+  .mobile-menu-link:hover,
+  .mobile-menu-link:active {
+    color: var(--warm);
+  }
+  .mobile-menu-cta {
+    display: block;
+    background: var(--warm);
+    color: var(--ink);
+    padding: 18px 32px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 40px;
+    transition: opacity 0.2s;
+  }
+  .mobile-menu-cta:hover { opacity: 0.9; }
+  .mobile-menu-langs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .mobile-menu-lang {
+    background: transparent;
+    border: none;
+    color: rgba(245, 240, 232, 0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    padding: 6px 10px;
+    transition: color 0.2s;
+  }
+  .mobile-menu-lang.active {
+    color: var(--warm);
+  }
+  .mobile-menu-address {
+    font-size: 14px;
+    color: rgba(245, 240, 232, 0.5);
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+  }
+
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -721,8 +846,11 @@
     .menu-grid { grid-template-columns: 1fr; }
     .location { grid-template-columns: 1fr; }
     .location-map { height: 40vh; }
-    nav { padding: 16px 24px; }
+    nav { padding: 16px 20px; gap: 12px; }
     .nav-links { display: none; }
+    .lang-toggle { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; margin-left: auto; }
     .hero-left { padding: 48px 24px; }
     .story-content, .location-content, .menu, .order-cta { padding: 60px 24px; }
     /* Iced coffee feature: stack on mobile and let the photo fill */
@@ -775,7 +903,33 @@
     <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
   </div>
   <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" class="nav-cta" data-track="order_click" data-location="nav">Order Now</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">×</button>
+  <div class="mobile-menu-inner">
+    <ul class="mobile-menu-links">
+      <li><a href="#story" class="mobile-menu-link" data-i18n="nav_story">Our Story</a></li>
+      <li><a href="#menu" class="mobile-menu-link" data-i18n="nav_menu">Menu</a></li>
+      <li><a href="#location" class="mobile-menu-link" data-i18n="nav_location">Location</a></li>
+      <li><a href="https://www.instagram.com/bite.sandwich/" target="_blank" rel="noopener" class="mobile-menu-link">Instagram</a></li>
+    </ul>
+    <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" rel="noopener" class="mobile-menu-cta" data-track="order_click" data-location="mobile_menu">Order Now</a>
+    <div class="mobile-menu-langs">
+      <button onclick="setLang('en')" id="mbtn-en" class="mobile-menu-lang">EN</button>
+      <span style="color:rgba(245,240,232,0.3);">/</span>
+      <button onclick="setLang('es')" id="mbtn-es" class="mobile-menu-lang">ES</button>
+    </div>
+    <div class="mobile-menu-address">
+      1576 SW 1st St<br>
+      <span style="color:var(--warm);font-size:12px;">Little Havana, Miami</span>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1394,6 +1548,11 @@ function setLang(lang) {
   // Update toggle buttons
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  // Mobile menu language buttons (only exist on mobile viewport)
+  const mbtnEn = document.getElementById('mbtn-en');
+  const mbtnEs = document.getElementById('mbtn-es');
+  if (mbtnEn) mbtnEn.classList.toggle('active', lang === 'en');
+  if (mbtnEs) mbtnEs.classList.toggle('active', lang === 'es');
 
   // Update html lang attribute
   document.documentElement.lang = lang;
@@ -1404,6 +1563,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('bite_lang') || 'en';
   setLang(saved);
 });
+
+// HAMBURGER MENU
+(function() {
+  const btn = document.getElementById('hamburgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  const closeBtn = document.getElementById('mobileMenuClose');
+  const links = document.querySelectorAll('.mobile-menu-link, .mobile-menu-cta');
+
+  if (!btn || !menu) return;
+
+  function openMenu() {
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+
+  // Close when tapping any menu link (so navigating to a section closes the menu)
+  links.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+  });
+})();
 </script>
 
 <!-- LIGHTBOX -->
