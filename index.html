@@ -90,6 +90,64 @@
   "acceptsReservations": "False"
 }
 </script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a chimi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A chimi (short for chimichurri sandwich) is a Dominican Republic street food classic. Grilled meat, cabbage, tomato, and house sauce, served on soft pan de agua bread. Dominican, not Argentine. At BITE, we serve traditional Dominican chimi with our house salsa especial, made with chorizo, chicken, pork, or beef."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is BITE Sandwich located?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1576 SW 1st Street, in the heart of Little Havana, Miami, FL 33135. We're an open-air counter with no dining room and no reservations. Order at the counter or online for pickup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are BITE Sandwich's hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monday through Thursday: 10 AM to 10 PM. Friday and Saturday: 10 AM to 11 PM. Closed Sundays."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does BITE Sandwich deliver?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We're on DoorDash and Uber Eats. You can also order directly from bitesandwich.com for pickup, which is the fastest and best-priced option."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does BITE Sandwich have vegetarian options?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Our Grilled Cheese sandwich, French Fries, Tequeño Cheese Bites, Fried Cheese Balls, Natural Juices, and full coffee menu are all vegetarian."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes BITE's chimi different?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Three things. First, our salsa especial de la casa, a house sauce we developed and don't share the recipe for. Second, real pan de agua baked to order, never pre-sliced. Third, green tomato instead of pickles or cucumber, the way it's done in the Dominican Republic."
+      }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&family=Alfa+Slab+One&family=Special+Elite&family=Courier+Prime&display=swap" rel="stylesheet">
 <style>
@@ -264,6 +322,15 @@
     display: flex; align-items: center; gap: 20px; flex-shrink: 0;
   }
   .ticker-dot { width: 4px; height: 4px; background: var(--warm); border-radius: 50%; }
+  .ticker-item.ticker-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--warm);
+  }
+  .ticker-item.ticker-tagline .ticker-dot { background: var(--cream); }
   @keyframes ticker {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -669,6 +736,8 @@
     }
     .reviews { padding: 60px 24px !important; }
     .reviews-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+    .faq { padding: 60px 24px !important; }
+    .faq-question { font-size: 17px !important; }
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
   }
 
@@ -743,6 +812,7 @@
     <div class="ticker-item"><span class="ticker-dot"></span>Tequeños</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Chimi Pork</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Chimi Chicken</div>
+    <div class="ticker-item ticker-tagline"><span class="ticker-dot"></span>The Finest Chimi</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Natural Juices</div>
     <!-- repeat for seamless loop -->
     <div class="ticker-item"><span class="ticker-dot"></span>Chimi Burger</div>
@@ -752,6 +822,7 @@
     <div class="ticker-item"><span class="ticker-dot"></span>Tequeños</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Chimi Pork</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Chimi Chicken</div>
+    <div class="ticker-item ticker-tagline"><span class="ticker-dot"></span>The Finest Chimi</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Natural Juices</div>
   </div>
 </div>
@@ -885,7 +956,7 @@
     </div>
     <div class="menu-card reveal" data-clover-url="https://bite-sandwich-miami.cloveronline.com/">
       <img src="images/menu-kibbeh.jpg" class="menu-card-img" alt="Kibbeh Quipe at BITE Sandwich Miami">
-      <div class="menu-card-name" data-i18n="kibbeh_name">Kibbeh — Quipe</div>
+      <div class="menu-card-name" data-i18n="kibbeh_name">Kibbeh / Quipe</div>
       <div class="menu-card-desc" data-i18n="kibbeh_desc">3-piece Dominican-style deep-fried bulgur with seasoned beef inside. A Little Havana staple.</div>
       <div class="menu-card-price">$10</div>
     </div>
@@ -938,7 +1009,7 @@
           "Drove nearly 30 miles for it. Among the best chimis I've ever tried."
         </p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.15em;color:rgba(26,26,24,0.55);">
-          — SANDER R.
+          SANDER R.
         </div>
       </div>
 
@@ -948,7 +1019,7 @@
           "A charming café with modern Dominican flavors. Great breakfast and fresh juices."
         </p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.15em;color:rgba(26,26,24,0.55);">
-          — CAROLINA A.
+          CAROLINA A.
         </div>
       </div>
 
@@ -958,7 +1029,7 @@
           "The original chimi sandwich. A perfect 10 out of 10."
         </p>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.15em;color:rgba(26,26,24,0.55);">
-          — ARLETTE M.
+          ARLETTE M.
         </div>
       </div>
 
@@ -1025,10 +1096,105 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq" style="background:var(--ink);color:var(--cream);padding:100px 40px;">
+  <div style="max-width:820px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.25em;color:var(--warm);margin-bottom:14px;">GOOD TO KNOW</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);font-weight:900;line-height:1.1;">
+        Frequently <em style="font-style:italic;color:var(--warm);">Asked</em>.
+      </h2>
+    </div>
+
+    <div class="faq-list">
+
+      <details class="faq-item" style="border-top:1px solid rgba(245,240,232,0.15);padding:24px 0;">
+        <summary class="faq-question" style="cursor:pointer;list-style:none;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:20px;">
+          <span>What is a chimi?</span>
+          <span class="faq-icon" style="color:var(--warm);font-size:24px;font-weight:300;transition:transform 0.3s;flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:18px;font-size:15px;line-height:1.75;color:rgba(245,240,232,0.75);">
+          A chimi (short for chimichurri sandwich) is a Dominican Republic street food classic. Grilled meat, cabbage, tomato, and house sauce, served on soft pan de agua bread. Dominican, not Argentine. This "chimi" is the sandwich, not the herb sauce. At BITE, we serve the real thing: traditional Dominican chimi with our house salsa especial, made with chorizo, chicken, pork, or beef.
+        </p>
+      </details>
+
+      <details class="faq-item" style="border-top:1px solid rgba(245,240,232,0.15);padding:24px 0;">
+        <summary class="faq-question" style="cursor:pointer;list-style:none;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:20px;">
+          <span>Where are you located?</span>
+          <span class="faq-icon" style="color:var(--warm);font-size:24px;font-weight:300;transition:transform 0.3s;flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:18px;font-size:15px;line-height:1.75;color:rgba(245,240,232,0.75);">
+          1576 SW 1st Street, in the heart of Little Havana, Miami, FL 33135. We're an open-air counter with no dining room and no reservations. Order at the counter or online for pickup.
+        </p>
+      </details>
+
+      <details class="faq-item" style="border-top:1px solid rgba(245,240,232,0.15);padding:24px 0;">
+        <summary class="faq-question" style="cursor:pointer;list-style:none;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:20px;">
+          <span>What are your hours?</span>
+          <span class="faq-icon" style="color:var(--warm);font-size:24px;font-weight:300;transition:transform 0.3s;flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:18px;font-size:15px;line-height:1.75;color:rgba(245,240,232,0.75);">
+          Monday through Thursday: 10 AM to 10 PM. Friday and Saturday: 10 AM to 11 PM. Closed Sundays.
+        </p>
+      </details>
+
+      <details class="faq-item" style="border-top:1px solid rgba(245,240,232,0.15);padding:24px 0;">
+        <summary class="faq-question" style="cursor:pointer;list-style:none;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:20px;">
+          <span>Do you deliver?</span>
+          <span class="faq-icon" style="color:var(--warm);font-size:24px;font-weight:300;transition:transform 0.3s;flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:18px;font-size:15px;line-height:1.75;color:rgba(245,240,232,0.75);">
+          Yes. We're on DoorDash and Uber Eats. You can also order directly from bitesandwich.com for pickup, which is the fastest and best-priced option.
+        </p>
+      </details>
+
+      <details class="faq-item" style="border-top:1px solid rgba(245,240,232,0.15);padding:24px 0;">
+        <summary class="faq-question" style="cursor:pointer;list-style:none;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:20px;">
+          <span>Do you have vegetarian options?</span>
+          <span class="faq-icon" style="color:var(--warm);font-size:24px;font-weight:300;transition:transform 0.3s;flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:18px;font-size:15px;line-height:1.75;color:rgba(245,240,232,0.75);">
+          Yes. Our Grilled Cheese sandwich, French Fries, Tequeño Cheese Bites, Fried Cheese Balls, Natural Juices, and full coffee menu are all vegetarian.
+        </p>
+      </details>
+
+      <details class="faq-item" style="border-top:1px solid rgba(245,240,232,0.15);border-bottom:1px solid rgba(245,240,232,0.15);padding:24px 0;">
+        <summary class="faq-question" style="cursor:pointer;list-style:none;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:20px;">
+          <span>What makes BITE's chimi different?</span>
+          <span class="faq-icon" style="color:var(--warm);font-size:24px;font-weight:300;transition:transform 0.3s;flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:18px;font-size:15px;line-height:1.75;color:rgba(245,240,232,0.75);">
+          Three things. First, our salsa especial de la casa, a house sauce we developed and don't share the recipe for. Second, real pan de agua baked to order, never pre-sliced. Third, green tomato instead of pickles or cucumber, the way it's done in the Dominican Republic. This is true Dominican chimi, made the way it should be.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* FAQ interactions */
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item[open] .faq-icon { transform: rotate(45deg); }
+  .faq-item summary:hover .faq-icon { color: var(--cream); }
+</style>
+
+<script>
+  // Track FAQ interactions in GA4
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('toggle', function() {
+      if (this.open && typeof gtag === 'function') {
+        const q = this.querySelector('.faq-question span').textContent;
+        gtag('event', 'faq_open', { question: q });
+      }
+    });
+  });
+</script>
+
 <!-- ORDER CTA -->
 <section class="order-cta" id="order">
   <h2 class="section-headline" data-i18n="order_headline">Ready to order?</h2>
-  <p class="section-body" data-i18n="order_sub">Available for pickup and delivery. Order through our site or find us on DoorDash, Uber Eats, and Grubhub.</p>
+  <p class="section-body" data-i18n="order_sub">Available for pickup and delivery. Order through our site or find us on DoorDash and Uber Eats.</p>
   <a href="https://www.clover.com/online-ordering/bite-sandwich-miami" target="_blank" rel="noopener" class="btn-order" data-track="order_click" data-location="main_cta">Order Now</a>
 </section>
 
@@ -1083,7 +1249,7 @@ const translations = {
     hours_sun: "Sunday",
     hours_closed: "Closed",
     order_headline: "Ready to order?",
-    order_sub: "Available for pickup and delivery. Order through our site or find us on DoorDash, Uber Eats, and Grubhub.",
+    order_sub: "Available for pickup and delivery. Order through our site or find us on DoorDash and Uber Eats.",
     menu_headline: "The Menu",
     scroll_text: "Scroll to explore",
     story_p1: "BITE started with one question: what does a chimi sandwich taste like when it's made right? The answer starts with the <strong>pan de agua</strong>. A traditional Dominican water bread with a crispy crust and a soft, fluffy interior. There's no dining room by design. The counter is where the conversation happens.",
@@ -1107,7 +1273,7 @@ const translations = {
     // Menu - Sides
     fries_name: "French Fries",
     tequenos_name: "Tequeño Cheese Bites",
-    kibbeh_name: "Kibbeh — Quipe",
+    kibbeh_name: "Kibbeh / Quipe",
     kibbeh_desc: "3-piece Dominican-style deep-fried bulgur with seasoned beef inside. A Little Havana staple.",
     cheese_balls_name: "Fried Cheese Balls",
 
@@ -1147,7 +1313,7 @@ const translations = {
     hours_sun: "Domingo",
     hours_closed: "Cerrado",
     order_headline: "Listo para ordenar?",
-    order_sub: "Disponible para recoger y delivery. Ordena en nuestro sitio o encuentranos en DoorDash, Uber Eats y Grubhub.",
+    order_sub: "Disponible para recoger y delivery. Ordena en nuestro sitio o encuentranos en DoorDash y Uber Eats.",
     menu_headline: "El Menu",
     scroll_text: "Desplazate para explorar",
     story_p1: "BITE nacio con una pregunta: como sabe un chimi cuando esta bien hecho? La respuesta empieza con el <strong>pan de agua</strong>. Un pan dominicano tradicional con una corteza crocante y un interior suave y esponjoso. No hay salon por diseno. El mostrador es donde ocurre la conversacion.",
@@ -1184,7 +1350,7 @@ const translations = {
     fries_desc: "Papas fritas crujientes.",
     tequenos_name: "Mini Tequenos de Queso",
     tequenos_desc: "3 piezas. Pide estos.",
-    kibbeh_name: "Kibbeh — Quipe",
+    kibbeh_name: "Kibbeh / Quipe",
     kibbeh_desc: "3 piezas de bulgur frito relleno de carne sazonada. Un clásico de La Pequeña Habana.",
     cheese_balls_name: "Bolitas de Queso Fritas",
     cheese_balls_desc: "6 piezas doradas y crujientes.",
@@ -1345,7 +1511,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Scroll depth tracking — fire at 25%, 50%, 75%, 100%
+  // Scroll depth tracking: fire at 25%, 50%, 75%, 100%
   const scrollMarks = [25, 50, 75, 100];
   const fired = {};
   window.addEventListener('scroll', () => {
